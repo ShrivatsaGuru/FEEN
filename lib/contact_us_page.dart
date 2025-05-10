@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'dart:ui' as ui;
 class ContactUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -156,10 +156,10 @@ class ContactUsPage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            filter: ui.ImageFilter.blur(sigmaX: 10, sigmaY: 10),
           child: BottomNavigationBar(
             backgroundColor: Colors.white.withOpacity(0.5),
-            currentIndex: 3, // You can adjust this based on your navigation logic
+            currentIndex: 2, // You can adjust this based on your navigation logic
             type: BottomNavigationBarType.fixed,
             selectedItemColor: Color(0xFF3A7CE0),
             unselectedItemColor: Colors.grey,
@@ -221,9 +221,9 @@ class _HoverAnimatedContainerState extends State<HoverAnimatedContainer> {
       child: AnimatedContainer(
         duration: Duration(milliseconds: 200),
         curve: Curves.easeInOut,
-        transform: isHovered
-            ? Matrix4.identity()..scale(1.05)
-            : Matrix4.identity(),
+          transform: isHovered
+              ? Matrix4.identity().scaled(1.05)
+              : Matrix4.identity(),
         child: InkWell(
           onTap: widget.onTap,
           onHover: (value) {

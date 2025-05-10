@@ -1,5 +1,7 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:ui';
+import 'contact_us_page.dart'; // Import the Contact Us page
 
 void main() {
   runApp(MyApp());
@@ -13,9 +15,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'Oswald',
       ),
-      home: HomeScreen(),
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/contact': (context) => ContactUsPage(),
+      },
+
+      initialRoute: '/',
     );
   }
 }
@@ -29,7 +35,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             Column(
               children: [
-                _buildAppBar(), // App bar at the top
+                _buildAppBar(),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -39,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                         _buildAdSection(),
                         _buildGallerySection(),
                         _buildNoticeSection(),
-                        // Add extra padding at the bottom
+
                         SizedBox(height: 80),
                       ],
                     ),
@@ -51,7 +57,7 @@ class HomeScreen extends StatelessWidget {
               left: 0,
               right: 0,
               bottom: 0,
-              child: _buildBottomNavigationBar(),
+              child: _buildBottomNavigationBar(context),
             ),
           ],
         ),
@@ -137,23 +143,22 @@ class HomeScreen extends StatelessWidget {
           Text(
             'Discover',
             style: TextStyle(
-              fontSize: 29, // Increased font size
+              fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF0623C3),
+              color: Color(0xFF3A7CE0),
             ),
           ),
           SizedBox(height: 4),
           Container(
             height: 1,
             color: Color(0xFF3A7CE0),
-
           ),
-          SizedBox(height: 15),
+          SizedBox(height: 16),
           Row(
             children: [
               Expanded(
                 child: _buildInfoCard(
-                  'Announcement',
+                  'Announcements',
                   '8 Notifications',
                   Icons.campaign_outlined,
                 ),
@@ -173,7 +178,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildInfoCard(
-                  'Upcoming\nEvents',
+                  'Upcoming Events',
                   '2 Notifications',
                   Icons.emoji_events_outlined,
                 ),
@@ -193,47 +198,49 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoCard(String title, String subtitle, IconData icon) {
+  Widget _buildInfoCard(String title, String subtitle, IconData iconData) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
       decoration: BoxDecoration(
-        border: Border.all(color: Color(0xFF0348A8)),
+        border: Border.all(color: Color(0xFF3A7CE0)),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Row(
-            children: [
-              CircleAvatar(
-                backgroundColor: Color(0xFF3A7CE0),
-                radius: 20,
-                child: Icon(icon, color: Colors.white, size: 20),
-              ),
-              SizedBox(width: 8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF3A7CE0),
-                      fontSize: 13.5, // Increased font size
-                    ),
+          Container(
+            decoration: BoxDecoration(
+              color: Color(0xFF3A7CE0),
+              shape: BoxShape.circle,
+            ),
+            padding: EdgeInsets.all(8),
+            child: Icon(
+              iconData,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
+          SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF3A7CE0),
                   ),
-                  SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 13, // Increased font size
-                      fontWeight: FontWeight.bold, // Bold
-                    ),
+                ),
+                Text(
+                  subtitle,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey[600],
                   ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -264,7 +271,7 @@ class HomeScreen extends StatelessWidget {
                 'Ad',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 14, // Increased font size
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -296,7 +303,7 @@ class HomeScreen extends StatelessWidget {
           Text(
             'Gallery',
             style: TextStyle(
-              fontSize: 29, // Increased font size
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Color(0xFF3A7CE0),
             ),
@@ -346,7 +353,7 @@ class HomeScreen extends StatelessWidget {
           Text(
             'Notice',
             style: TextStyle(
-              fontSize: 29, // Increased font size
+              fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Color(0xFF3A7CE0),
             ),
@@ -379,7 +386,7 @@ class HomeScreen extends StatelessWidget {
           Text(
             'Workshop on Smart Grid Technology',
             style: TextStyle(
-              fontSize: 18, // Increased font size
+              fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Colors.black87,
             ),
@@ -388,9 +395,8 @@ class HomeScreen extends StatelessWidget {
           Text(
             'The Electrical Engineering Association is organizing a workshop on Smart Grid Technology to enhance students\' understanding of modern power systems and automation.',
             style: TextStyle(
-              fontSize: 16, // Increased font size
+              fontSize: 14,
               color: Colors.black54,
-              fontWeight: FontWeight.bold, // Bold
             ),
           ),
           SizedBox(height: 12),
@@ -408,13 +414,7 @@ class HomeScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                 ),
               ),
-              child: Text(
-                'Add to Calendar',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold, // Bold
-                  fontSize: 14, // Increased font size
-                ),
-              ),
+              child: Text('Add to Calendar'),
             ),
           ),
         ],
@@ -422,7 +422,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNavigationBar() {
+  Widget _buildBottomNavigationBar(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.1), // Semi-transparent white
@@ -440,12 +440,28 @@ class HomeScreen extends StatelessWidget {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3), // Blur effect
           child: BottomNavigationBar(
-            backgroundColor: Colors.white.withOpacity(0.1), // Match translucent effect
+            backgroundColor: Colors.white.withOpacity(0.1),
             currentIndex: 0,
             type: BottomNavigationBarType.fixed,
             selectedItemColor: Color(0xFF3A7CE0),
             unselectedItemColor: Colors.black,
-            elevation: 0, // Remove default elevation
+            elevation: 0,
+            onTap: (index) {
+              switch (index) {
+                case 0:
+                // Stay on Home
+                  break;
+                case 1:
+                // Navigate to Alerts (not implemented yet)
+                  break;
+                case 2:
+                  Navigator.pushNamed(context, '/contact'); // Example target
+                  break;
+                case 3:
+                // Navigate to Profile (not implemented yet)
+                  break;
+              }
+            },
             items: [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),
@@ -465,6 +481,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
+
         ),
       ),
     );
