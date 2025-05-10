@@ -74,7 +74,7 @@ flutter:
   fonts:
     - family: Oswald
       fonts:
-        - asset: assets/font/PlayfairDisplay-VariableFont_wght.ttf
+        - asset: assets/font/Work_Sans/WorkSans-VariableFont_wght.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
 

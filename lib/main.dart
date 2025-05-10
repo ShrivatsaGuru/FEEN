@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
             colors: [
               // Blue
               Colors.white,
-              Colors.lightBlueAccent, // White
+              Color(0xFF0348A8), // White
             ],
           ),
         ),
@@ -112,7 +112,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.blue,
+                  color: Color(0xFF0623C3),
                 ),
                 padding: EdgeInsets.all(8),
                 child: Icon(
@@ -139,20 +139,21 @@ class HomeScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: 29, // Increased font size
               fontWeight: FontWeight.bold,
-              color: Color(0xFF3A7CE0),
+              color: Color(0xFF0623C3),
             ),
           ),
           SizedBox(height: 4),
           Container(
             height: 1,
             color: Color(0xFF3A7CE0),
+
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 15),
           Row(
             children: [
               Expanded(
                 child: _buildInfoCard(
-                  'Announcements',
+                  'Announcement',
                   '8 Notifications',
                   Icons.campaign_outlined,
                 ),
@@ -172,7 +173,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               Expanded(
                 child: _buildInfoCard(
-                  'Upcoming Events',
+                  'Upcoming\nEvents',
                   '2 Notifications',
                   Icons.emoji_events_outlined,
                 ),
@@ -196,7 +197,7 @@ class HomeScreen extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.black),
+        border: Border.all(color: Color(0xFF0348A8)),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
