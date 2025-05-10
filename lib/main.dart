@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:ui';
 import 'contact_us_page.dart'; // Import the Contact Us page
+import 'EventsPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => HomeScreen(),
         '/contact': (context) => ContactUsPage(),
+        '/events': (context) => EventsPage(),
       },
 
       initialRoute: '/',
@@ -41,7 +43,7 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildDiscoverSection(),
+                        _buildDiscoverSection(context),
                         _buildAdSection(),
                         _buildGallerySection(),
                         _buildNoticeSection(),
@@ -134,7 +136,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDiscoverSection() {
+  Widget _buildDiscoverSection(BuildContext context)
+  {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Column(
@@ -177,10 +180,15 @@ class HomeScreen extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: _buildInfoCard(
-                  'Upcoming Events',
-                  '2 Notifications',
-                  Icons.emoji_events_outlined,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/events');
+                  },
+                  child: _buildInfoCard(
+                    'Upcoming Events',
+                    '2 Notifications',
+                    Icons.emoji_events_outlined,
+                  ),
                 ),
               ),
               SizedBox(width: 12),
@@ -197,6 +205,7 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
 
   Widget _buildInfoCard(String title, String subtitle, IconData iconData) {
     return Container(
