@@ -15,15 +15,13 @@ class _ComplaintPageState extends State<ComplaintPage> {
   final List<Map<String, String>> _complaints = [
     {
       "title": "Complaint 2",
-      "message":
-      "Details about the complaint registered",
+      "message": "Details about the complaint registered",
       "status": "Unresolved",
       "date": "01/01/2025"
     },
     {
       "title": "Complaint 3",
-      "message":
-      "Details about the complaint registered",
+      "message": "Details about the complaint registered",
       "status": "Resolved",
       "date": "01/01/2025"
     },
