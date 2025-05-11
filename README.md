@@ -1,6 +1,6 @@
-# untitled
+# Federation of Electrical Entrepreneurs of Nepal- FEEN
 
-A new Flutter project.
+A brochure app for the client FEEN.
 
 ## Getting Started
 
