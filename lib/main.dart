@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:untitled/Complaint.dart';
 import 'dart:ui';
 import 'contact_us_page.dart'; // Import the Contact Us page
 import 'EventsPage.dart';
 import 'Updates.dart';
 import 'Announcements.dart';
-
+import 'Complaint.dart';
+import 'login_screen.dart';
+import 'register_screen.dart';
 void main() {
   runApp(MyApp());
 }
@@ -21,16 +24,19 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/': (context) => HomeScreen(),
+        '/login': (context) => LoginScreen(),
+        '/register': (context) => RegisterScreen(),
         '/contact': (context) => ContactUsPage(),
         '/events': (context) => EventsPage(),
-        '/updates':(context)=> UpdatesScreen(),
-        '/announcement':(context)=>AnnouncementsScreen(),
+        '/updates': (context) => UpdatesScreen(),
+        '/announcement': (context) => AnnouncementsScreen(),
+        '/complaint': (context) => ComplaintPage(),
       },
-
-      initialRoute: '/',
+      initialRoute: '/login',
     );
   }
 }
+
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -73,7 +79,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildAppBar() {
     return PreferredSize(
-      preferredSize: Size.fromHeight(10), // Set fixed height
+      preferredSize: Size.fromHeight(10),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 30),
         decoration: BoxDecoration(
@@ -83,7 +89,7 @@ class HomeScreen extends StatelessWidget {
             colors: [
               // Blue
               Colors.white,
-              Color(0xFF0348A8), // White
+              Color(0xFF82B3F2),
             ],
           ),
         ),
@@ -96,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                   CircleAvatar(
                     backgroundImage: AssetImage('photos/profile.png'),
                   ),
-                  SizedBox(width: 8), // Space between avatar and text
+                  SizedBox(width: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -104,17 +110,17 @@ class HomeScreen extends StatelessWidget {
                       Text(
                         'Admin',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Color(0xFF0B4DA1),
                           fontWeight: FontWeight.bold,
-                          fontSize: 18, // Increased font size
+                          fontSize: 18,
                         ),
                       ),
                       Text(
                         'admin@domain.com',
                         style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 14, // Increased font size
-                          fontWeight: FontWeight.bold, // Bold
+                          color: Color(0xFF0B4DA1),
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -124,7 +130,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Color(0xFF0623C3),
+                  color: Color(0xFF0070FF),
                 ),
                 padding: EdgeInsets.all(8),
                 child: Icon(
@@ -152,13 +158,13 @@ class HomeScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF3A7CE0),
+              color: Color(0xFF0B4DA1),
             ),
           ),
           SizedBox(height: 4),
           Container(
             height: 1,
-            color: Color(0xFF3A7CE0),
+            color: Color(0xFF0B4DA1),
           ),
           SizedBox(height: 16),
           Row(
@@ -207,10 +213,15 @@ class HomeScreen extends StatelessWidget {
               ),
               SizedBox(width: 12),
               Expanded(
-                child: _buildInfoCard(
-                  'Complaints',
-                  '0 Notifications',
-                  Icons.description_outlined,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/complaint');
+                  },
+                  child: _buildInfoCard(
+                    'Complaint',
+                    '2 Notifications',
+                    Icons.update_outlined,
+                  ),
                 ),
               ),
             ],
@@ -252,7 +263,7 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF3A7CE0),
+                    color: Color(0xFF0B4DA1),
                   ),
                 ),
                 Text(
@@ -328,13 +339,13 @@ class HomeScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF3A7CE0),
+              color: Color(0xFF0B4DA1),
             ),
           ),
           SizedBox(height: 4),
           Container(
             height: 1,
-            color: Color(0xFF3A7CE0),
+            color: Color(0xFF0B4DA1),
           ),
           SizedBox(height: 16),
           Row(
@@ -378,13 +389,13 @@ class HomeScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF3A7CE0),
+              color: Color(0xFF0B4DA1),
             ),
           ),
           SizedBox(height: 4),
           Container(
             height: 1,
-            color: Color(0xFF3A7CE0),
+            color: Color(0xFF0B4DA1),
           ),
           SizedBox(height: 16),
           _buildNoticeCard(),

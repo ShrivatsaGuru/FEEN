@@ -1,27 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart'; // Don't forget to add intl package to pubspec.yaml and run 'flutter pub get'
-
-// Main application widget for demonstration purposes
-// You would typically have this in your main.dart or a similar setup file.
-// void main() {
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Flutter Events App',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//         // If you want to use the specific blue color 0xFF3A7CE0 as primary:
-//         // colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF3A7CE0)),
-//         // useMaterial3: true, // Optional: if you want Material 3 features
-//       ),
-//       home: EventsPage(), // Set EventsPage as the home screen
-//     );
-//   }
-// }
+import 'package:intl/intl.dart';
 
 class EventsPage extends StatelessWidget {
   @override
@@ -169,7 +147,7 @@ class EventsPage extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   Text(
-                    "Porem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis.",
+                    "Details about the event about to happen.",
                     style: TextStyle(fontSize: 14, color: Colors.black54, height: 1.4),
                   ),
                 ],
