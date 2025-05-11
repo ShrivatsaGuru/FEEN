@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:untitled/Complaint.dart';
 import 'dart:ui';
 import 'contact_us_page.dart'; // Import the Contact Us page
 import 'EventsPage.dart';
 import 'Updates.dart';
 import 'Announcements.dart';
-
+import 'Complaint.dart';
 void main() {
   runApp(MyApp());
 }
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         '/events': (context) => EventsPage(),
         '/updates':(context)=> UpdatesScreen(),
         '/announcement':(context)=>AnnouncementsScreen(),
+        '/complaint':(context)=>ComplaintPage(),
       },
 
       initialRoute: '/',
@@ -207,10 +209,15 @@ class HomeScreen extends StatelessWidget {
               ),
               SizedBox(width: 12),
               Expanded(
-                child: _buildInfoCard(
-                  'Complaints',
-                  '0 Notifications',
-                  Icons.description_outlined,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/complaint');
+                  },
+                  child: _buildInfoCard(
+                    'Complaint',
+                    '2 Notifications',
+                    Icons.update_outlined,
+                  ),
                 ),
               ),
             ],
