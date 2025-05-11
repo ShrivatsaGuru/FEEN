@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'dart:ui';
 import 'contact_us_page.dart'; // Import the Contact Us page
 import 'EventsPage.dart';
+import 'Updates.dart';
+import 'Announcements.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => HomeScreen(),
         '/contact': (context) => ContactUsPage(),
         '/events': (context) => EventsPage(),
+        '/updates':(context)=> UpdatesScreen(),
+        '/announcement':(context)=>AnnouncementsScreen(),
       },
 
       initialRoute: '/',
@@ -160,18 +164,28 @@ class HomeScreen extends StatelessWidget {
           Row(
             children: [
               Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/announcement');
+                  },
                 child: _buildInfoCard(
                   'Announcements',
                   '8 Notifications',
                   Icons.campaign_outlined,
                 ),
               ),
+              ),
               SizedBox(width: 12),
               Expanded(
-                child: _buildInfoCard(
-                  'Updates',
-                  '2 Notifications',
-                  Icons.update_outlined,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/updates');
+                  },
+                  child: _buildInfoCard(
+                    'Updates',
+                    '2 Notifications',
+                    Icons.update_outlined,
+                  ),
                 ),
               ),
             ],
