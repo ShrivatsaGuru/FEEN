@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:ui' as ui;
 class ContactUsPage extends StatelessWidget {
+  const ContactUsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -201,10 +203,10 @@ class HoverAnimatedContainer extends StatefulWidget {
   final VoidCallback onTap;
 
   const HoverAnimatedContainer({
-    Key? key,
+    super.key,
     required this.builder,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   _HoverAnimatedContainerState createState() => _HoverAnimatedContainerState();

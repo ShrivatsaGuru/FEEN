@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class EventsPage extends StatelessWidget {
+  const EventsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,13 +169,13 @@ class HorizontallyScrollableDateSelector extends StatefulWidget {
   final Color? accentColor;
   final Color? borderColor;
 
-  HorizontallyScrollableDateSelector({
-    Key? key,
+  const HorizontallyScrollableDateSelector({
+    super.key,
     this.initialDate,
     this.onDateSelected,
     this.accentColor,
     this.borderColor,
-  }) : super(key: key);
+  });
 
   @override
   _HorizontallyScrollableDateSelectorState createState() =>

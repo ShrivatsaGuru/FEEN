@@ -1,6 +1,32 @@
 import 'package:flutter/material.dart';
+import 'api_service.dart';
+import 'main.dart'; // For HomeScreen navigation
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  String error = '';
+
+  void handleLogin() async {
+    bool success = await ApiService.login(
+      emailController.text.trim(),
+      passwordController.text.trim(),
+    );
+
+    if (success) {
+      Navigator.pushReplacementNamed(context, '/'); // Navigate to HomeScreen
+    } else {
+      setState(() {
+        error = 'Login failed. Please check your credentials.';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,22 +44,14 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 40),
-
-                // Updated: Logo Image
                 Image.asset('photos/Logo.jpg', height: 100),
-
                 SizedBox(height: 10),
                 Text(
                   'Federation of Electrical\nEntrepreneurs of Nepal',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.blue[800],
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.blue[800]),
                 ),
                 SizedBox(height: 24),
-
-                // Login/Register Toggle
                 Row(
                   children: [
                     Expanded(
@@ -51,10 +69,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         child: Text(
                           'Login',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -75,18 +90,13 @@ class LoginScreen extends StatelessWidget {
                         ),
                         child: Text(
                           'Register',
-                          style: TextStyle(
-                            color: Colors.blue[900],
-                            fontWeight: FontWeight.w500,
-                          ),
+                          style: TextStyle(color: Colors.blue[900], fontWeight: FontWeight.w500),
                         ),
                       ),
                     ),
                   ],
                 ),
-
                 SizedBox(height: 50),
-
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -98,15 +108,14 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 SizedBox(height: 16),
-
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       hintText: 'Email/Phone No',
                       hintStyle: TextStyle(color: Colors.grey),
@@ -115,15 +124,14 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 SizedBox(height: 16),
-
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: TextField(
+                    controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: 'Password',
@@ -133,15 +141,17 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
+                SizedBox(height: 16),
+                if (error.isNotEmpty)
+                  Text(
+                    error,
+                    style: TextStyle(color: Colors.red),
+                  ),
                 SizedBox(height: 20),
-
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/');
-                    },
+                    onPressed: handleLogin,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue[800],
                       padding: EdgeInsets.symmetric(vertical: 16),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ComplaintPage extends StatefulWidget {
-  const ComplaintPage({Key? key}) : super(key: key);
+  const ComplaintPage({super.key});
 
   @override
   State<ComplaintPage> createState() => _ComplaintPageState();

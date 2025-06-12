@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:untitled/Complaint.dart';
 import 'dart:ui';
 import 'contact_us_page.dart'; // Import the Contact Us page
 import 'EventsPage.dart';
+import 'package:http/http.dart' as http;
 import 'Updates.dart';
 import 'Announcements.dart';
-import 'Complaint.dart';
 import 'login_screen.dart';
 import 'register_screen.dart';
+import 'api_service.dart';
+
 void main() {
   runApp(MyApp());
 }
 
+const String baseUrl = 'http://10.0.2.2:8000/api';
+
+
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,6 +45,8 @@ class MyApp extends StatelessWidget {
 
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
